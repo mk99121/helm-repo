@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: httpd
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+      - name: httpd
+        image: docker.io/{{ .Values.deployment.name }}:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: {{.Values.VolumeMounts.mountpaths}}
+          name: httpd-conf
+          subPath: index.html
+    
+

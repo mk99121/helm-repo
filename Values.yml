@@ -1,0 +1,9 @@
+deployment:  docker.io/{{ .Values.deployment.name }}:latest
+  replicaCount: 2
+  name: httpd
+service:
+  port: 8080
+  targetPort: 80
+  name: httpd
+VolumeMounts:
+ mountpaths: /usr/local/apache2/conf/httpd.conf
